@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    container_name: rag_app
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./data:/app/data
+      - ./storage:/app/storage
+    environment:
+      - OLLAMA_HOST=host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  rag_network:
+    driver: bridge
+
+volumes:
+  ollama_data: 
